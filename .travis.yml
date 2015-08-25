@@ -9,6 +9,21 @@ julia:
 notifications:
   email: false
 # uncomment the following lines to override the default test script
-#script:
-#  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-#  - julia -e 'Pkg.clone(pwd()); Pkg.build("Dummy"); Pkg.test("Dummy"; coverage=true)'
+script:
+  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+  - julia -e 'Pkg.add("Images"); Pkg.checkout("Images", "teh/colors")'
+  - julia -e 'Pkg.add("Gadfly"); Pkg.checkout("Gadfly", "teh/colors2"')
+  - julia -e 'Pkg.checkout("DataArrays")
+  - julia -e 'Pkg.checkout("Hexagons")
+  - julia -e 'Pkg.checkout("Compose", "teh/colors2")'
+  - julia -e 'Pkg.checkout("Cairo", "teh/colors2")'
+  - julia -e 'Pkg.checkout("Graphics", "teh/colors")'
+  - julia -e 'Pkg.add("Winston"); Pkg.checkout("Winston", "teh/colors")'
+  - julia -e 'Pkg.add("ProfileView"); Pkg.checkout("ProfileView", "teh/colors")'
+  - julia -e 'Pkg.test("Images")'
+  - julia -e 'Pkg.test("Cairo")'
+  - julia -e 'Pkg.test("Graphics")'
+  - julia -e 'Pkg.test("Compose")'
+  - julia -e 'Pkg.test("Gadfly")'
+  - xvfb-run julia -e 'Pkg.test("Winston")'
+  - xvfb-run julia -e 'Pkg.test("ProfileView")'
