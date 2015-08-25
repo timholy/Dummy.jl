@@ -1,5 +1,6 @@
 # Documentation: http://docs.travis-ci.com/user/languages/julia/
 language: julia
+sudo: required
 os:
   - linux
 julia:
@@ -10,6 +11,8 @@ notifications:
 # uncomment the following lines to override the default test script
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+  - julia -e 'Pkg.add("ColorTypes"); Pkg.add("Colors"); Pkg.add("ColorVectorSpace")'
+  - julia -e 'Pkg.add("Tk")'
   - julia -e 'Pkg.add("Images"); Pkg.checkout("Images", "teh/colors")'
   - julia -e 'Pkg.add("Gadfly"); Pkg.checkout("Gadfly", "teh/colors2")'
   - julia -e 'Pkg.checkout("DataArrays")'
