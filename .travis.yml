@@ -25,6 +25,5 @@ script:
   - julia -e 'Pkg.test("Images")'
   - julia -e 'Pkg.test("Cairo")'
   - julia -e 'Pkg.test("Graphics")'
-  - julia -e 'Pkg.test("Compose")'
   - julia -e 'Pkg.test("Gadfly")'
   - xvfb-run julia -e 'Pkg.test("Winston"); Pkg.test("ProfileView")'
